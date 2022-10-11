@@ -13,10 +13,22 @@ class Login {
             test: 'ok'
         }
     }
+    static async Login(ctx) {
+        const {username, password} = ctx.body
+        const data = await LoginDao.findAll({
+            where: {
+                username,
+                password
+            },
+            attributes: ['uid']
+        })
+        console.log(data)
+    }
 }
 
 
 router.get('/', Login.List)
 
+router.post('/', Login.Login)
 
 module.exports = router

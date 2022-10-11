@@ -1,8 +1,10 @@
 const Koa = require('koa')
 const {PORT, ENV} = require('./config/config')
 const {router} = require('./router')
+const infoLog = require('./middleware/info')
 const app = new Koa
 
+app.use(infoLog)
 
 app.use(router.routes()).use(router.allowedMethods())
 app.listen(PORT, () => {
